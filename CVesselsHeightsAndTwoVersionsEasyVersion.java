@@ -15,23 +15,19 @@ public class CVesselsHeightsAndTwoVersionsEasyVersion {
                 arr[i]  = sc.nextLong();
             }
 
-            for (int k=0; k<n; k++) {
-                long sum = 0;
-                sum += arr[(k-1)%n] + arr[k];
-                if (k>=2) {
-                    int i=k-2;
-                    long maxi = arr[i+1];
-                    while(i>=0) {
-                        maxi = Math.max(maxi, arr[i]);
-                        sum += maxi;
-                        i--;
-                    }
+            for (int i=0; i<n; i++) {
+                long maxRight = 0;
+                for (int j=0; j<n; j++) {
+                    maxRight = Math.max(maxRight, arr[(i+j)%n]);
                 }
-
-                int i=k+2;
-                long maxi = arr[k];
+                long maxLeft = 0;
+                for (int j=0; j<n; j++) {
+                    maxLeft = Math.max(maxLeft, arr[(i-j+n)%n]);
+                }
+                long water = Math.min(maxLeft, maxRight);
+                System.out.print(water + " ");
             }
-
+            System.out.println();
         }
     }
 }
