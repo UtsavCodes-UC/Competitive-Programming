@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class CStepanAndPermutation {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,22 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int x = fs.nextInt();
+            int y = fs.nextInt();
+            int arr[] = new int[n];
 
-            sb.append("Answer").append('\n');
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextInt();
+            }
+
+            int steps = (int) gcd((long) x, (long) y);
+            String ans  = "YES";
+            for(int i=0; i<n; i++) {
+                if ((arr[i] - ((i+1)%steps))%steps != 0) ans = "NO";
+            }
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

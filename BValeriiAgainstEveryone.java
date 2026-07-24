@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BValeriiAgainstEveryone {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,24 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            String ans = "NO";
 
-            sb.append("Answer").append('\n');
+            int n = fs.nextInt();
+            long b[] = new long[n];
+
+            for (int i=0; i<n; i++) {
+                b[i] = fs.nextLong();
+            }
+
+            Arrays.sort(b);
+
+            for (int i=1; i<n; i++) {
+                if (b[i] == b[i-1]) {
+                    ans = "YES";
+                    break;
+                }
+            }
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

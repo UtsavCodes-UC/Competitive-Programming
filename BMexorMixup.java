@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BMexorMixup {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -114,19 +104,6 @@ public class CLASS_NAME {
         return a / gcd(a, b) * b;
     }
 
-    static boolean isPrime(long n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-
-        for (long i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0)
-                return false;
-        }
-
-        return true;
-    }
-
     public static void main(String[] args) throws Exception {
 
         FastScanner fs = new FastScanner();
@@ -135,12 +112,24 @@ public class CLASS_NAME {
         int t = fs.nextInt();
 
         while (t-- > 0) {
+            int a = fs.nextInt();
+            int b = fs.nextInt();
 
-            
-
-            sb.append("Answer").append('\n');
+            //xor==b => a
+            //xor^xor^b = b
+            int xor = 0;
+            int n = a-1;
+            if (n%4 == 0) xor = n;
+            else if(n%4 == 1) xor = 1;
+            else if(n%4 == 2) xor=n+1;
+            else xor = 0;
+            int newXor = xor^b;
+            if (xor != b) {
+                if (newXor == a) a+=2;
+                else a++;
+            }
+            sb.append(a).append('\n');
         }
-
         System.out.print(sb);
     }
 }

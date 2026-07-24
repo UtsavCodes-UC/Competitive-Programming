@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BRoofConstruction {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -114,19 +104,6 @@ public class CLASS_NAME {
         return a / gcd(a, b) * b;
     }
 
-    static boolean isPrime(long n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-
-        for (long i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0)
-                return false;
-        }
-
-        return true;
-    }
-
     public static void main(String[] args) throws Exception {
 
         FastScanner fs = new FastScanner();
@@ -136,9 +113,17 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
+            int n = fs.nextInt();
+            long msb = (long) (Math.log(n-1) / Math.log(2));
             
+            for (double i=Math.pow(2, msb)-1; i>=0; i--) {
+                System.out.print((int) i + " ");
+            }
 
-            sb.append("Answer").append('\n');
+            for(double i=Math.pow(2, msb); i<=n-1; i++) {
+                System.out.print((int) i + " ");
+            }
+            System.out.println();
         }
 
         System.out.print(sb);

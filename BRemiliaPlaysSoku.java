@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BRemiliaPlaysSoku {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -86,16 +86,6 @@ public class CLASS_NAME {
 
         double nextDouble() throws IOException {
             return Double.parseDouble(next());
-        }
-    }
-
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
         }
     }
 

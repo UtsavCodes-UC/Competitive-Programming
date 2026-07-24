@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class B2DTraveling {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -132,13 +132,35 @@ public class CLASS_NAME {
         FastScanner fs = new FastScanner();
         StringBuilder sb = new StringBuilder();
 
-        int t = fs.nextInt();
+        int tc = fs.nextInt();
 
-        while (t-- > 0) {
+        while (tc-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int k = fs.nextInt();
+            int s = fs.nextInt()-1;
+            int t = fs.nextInt()-1;
 
-            sb.append("Answer").append('\n');
+            long x[] = new long[n];
+            long y[] = new long[n];
+
+            for (int i = 0; i<n; i++) {
+                x[i] = fs.nextLong();
+                y[i] = fs.nextLong();
+            }
+
+            long ans = Math.abs(x[s] - x[t]) + Math.abs(y[s] - y[t]);
+
+            long mins = Long.MAX_VALUE, mint = Long.MAX_VALUE;
+
+            for (int i = 0; i < k; i++) {
+                mins = Math.min(mins, Math.abs(x[s] - x[i]) + Math.abs(y[s] - y[i]));
+                mint = Math.min(mint, Math.abs(x[t] - x[i]) + Math.abs(y[t] - y[i]));
+            }
+
+            if (k!=0) ans = Math.min(ans, mins+mint);
+
+            sb.append(ans).append("\n");
         }
 
         System.out.print(sb);

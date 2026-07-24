@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BFairNumbers {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,22 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            long n = fs.nextLong();
 
-            sb.append("Answer").append('\n');
+            while(true) {
+                long temp = n;
+                while(temp > 0) {
+                    int lastDigit = (int) (temp%10);
+                    if(lastDigit != 0) {
+                        if (n%lastDigit != 0) break;
+                    }
+                    temp /= 10;
+                }
+                if (temp == 0) break;
+                n++;
+            }
+
+            sb.append(n).append('\n');
         }
 
         System.out.print(sb);

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class ARedVersusBlue {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -114,19 +104,6 @@ public class CLASS_NAME {
         return a / gcd(a, b) * b;
     }
 
-    static boolean isPrime(long n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-
-        for (long i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0)
-                return false;
-        }
-
-        return true;
-    }
-
     public static void main(String[] args) throws Exception {
 
         FastScanner fs = new FastScanner();
@@ -135,10 +112,28 @@ public class CLASS_NAME {
         int t = fs.nextInt();
 
         while (t-- > 0) {
+            int n = fs.nextInt();
+            int r = fs.nextInt();
+            int b = fs.nextInt();
 
-            
+            int cont = r/(b+1);
+            int left = r % (b+1);
+            String str = new String();
 
-            sb.append("Answer").append('\n');
+            for (int i=0; i<=b; i++) {
+                for (int j=0; j<cont; j++) {
+                    str += "R";
+                }
+                if (left > 0) {
+                    str += "R";
+                    left--;
+                }
+                if (i != b) {
+                    str += "B";
+                }
+            }
+
+            sb.append(str).append('\n');
         }
 
         System.out.print(sb);

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class ATheShankhadeepBypass {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,39 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int arr[] = new int[n];
+            HashMap<Integer, Integer> freq = new HashMap<>();
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextInt();
+            }
 
-            sb.append("Answer").append('\n');
+            for(int i=0; i<=n; i++) {
+                freq.put(i, 0);
+            }
+
+            for(int i=0; i<n; i++) {
+                freq.put(arr[i], freq.get(arr[i])+1);
+            }
+
+            int mex1 = 0;
+            int mex2 = 0;
+            boolean isDone = false;
+            for(int i=0; i<freq.size(); i++) {
+                if(freq.get(i) > 1) continue;
+                if (freq.get(i) == 1) {
+                    if (!isDone) {
+                        mex2 = i;
+                        isDone = true;
+                    }
+                }
+                else {
+                    mex1 = i;
+                    if (!isDone) mex2 = i;
+                    break;
+                }
+            }
+            sb.append(mex1+mex2).append('\n');
         }
 
         System.out.print(sb);

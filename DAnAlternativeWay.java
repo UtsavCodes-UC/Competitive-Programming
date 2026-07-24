@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class DAnAlternativeWay {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,29 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            long a[] = new long[n];
+            long b[] = new long[n];
 
-            sb.append("Answer").append('\n');
+            for (int i=0; i<n; i++) {
+                a[i] = fs.nextLong();
+            }
+
+            for(int i=0; i<n; i++) {
+                b[i] = fs.nextLong();
+            }
+            boolean ans = true;
+            long diff =0;
+            for (int i=0; i<n; i++) {
+                diff += b[i] - a[i];
+                if (diff < 0) {
+                    ans = false;
+                    break;
+                }
+            }
+
+            if (ans) sb.append("YES").append('\n');
+            else sb.append("NO").append('\n');
         }
 
         System.out.print(sb);

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BTrianglesOnARectangle {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -114,19 +104,6 @@ public class CLASS_NAME {
         return a / gcd(a, b) * b;
     }
 
-    static boolean isPrime(long n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-
-        for (long i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0)
-                return false;
-        }
-
-        return true;
-    }
-
     public static void main(String[] args) throws Exception {
 
         FastScanner fs = new FastScanner();
@@ -136,9 +113,49 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int w = fs.nextInt();
+            int h = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            int k = fs.nextInt();
+
+            int arr[] = new int[k];
+
+            for (int i=0; i<k; i++) {
+                arr[i] = fs.nextInt();
+            }
+
+            int a = arr[k-1]-arr[0];
+
+            k = fs.nextInt();
+            arr = new int[k];
+
+            for(int i=0; i<k; i++) {
+                arr[i] = fs.nextInt();
+            }
+
+            int b = arr[k-1]-arr[0];
+
+            long maxArea = (long) Math.max(a,b) * (long) h;
+
+            k = fs.nextInt();
+            arr = new int[k];
+
+            for(int i=0; i<k; i++) {
+                arr[i] = fs.nextInt();
+            }
+            a = arr[k-1] - arr[0];
+
+            k=fs.nextInt();
+            arr = new int[k];
+
+            for(int i=0; i<k; i++) {
+                arr[i] = fs.nextInt();
+            }
+            b = arr[k-1] - arr[0];
+
+            maxArea = Math.max(maxArea, (long) Math.max(a,b)* (long) w);
+
+            sb.append(maxArea).append('\n');
         }
 
         System.out.print(sb);

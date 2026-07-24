@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class CManhattanPairs {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -114,17 +104,14 @@ public class CLASS_NAME {
         return a / gcd(a, b) * b;
     }
 
-    static boolean isPrime(long n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
+    static class Pair {
+        int val;
+        int idx;
 
-        for (long i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0)
-                return false;
+        Pair(int val, int idx) {
+            this.val = val;
+            this.idx = idx;
         }
-
-        return true;
     }
 
     public static void main(String[] args) throws Exception {
@@ -136,11 +123,58 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
+            int n = fs.nextInt();
+            ArrayList<Integer> q1 = new ArrayList<>();
+            ArrayList<Integer> q2 = new ArrayList<>();
+            ArrayList<Integer> q3 = new ArrayList<>();
+            ArrayList<Integer> q4 = new ArrayList<>();
+            
             
 
-            sb.append("Answer").append('\n');
+            Pair[] x = new Pair[n];
+            Pair[] y = new Pair[n];
+
+            for (int i = 0; i < n; i++) {
+                int xi = fs.nextInt();
+                int yi = fs.nextInt();
+
+                x[i] = new Pair(xi, i);
+                y[i] = new Pair(yi, i);
+            }
+
+            Arrays.sort(x, Comparator.comparingInt(a -> a.val));
+            Arrays.sort(y, Comparator.comparingInt(a -> a.val));
+
+            int[] rankX = new int[n];
+            int[] rankY = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                rankX[x[i].idx] = i;
+                rankY[y[i].idx] = i;
+            }
+
+            for (int i = 0; i < n; i++) {
+
+                boolean rightX = rankX[i] >= n/2;
+                boolean upperY = rankY[i] >= n/2;
+
+                if (!rightX && !upperY)
+                    q1.add(i+1);
+                else if (rightX && !upperY)
+                    q2.add(i+1);
+                else if (rightX && upperY)
+                    q3.add(i+1);
+                else
+                    q4.add(i+1);
+            }
+
+            for (int i=0; i<q1.size(); i++) System.out.println(q1.get(i) + " " + q3.get(i));
+            for (int i=0; i<q2.size(); i++) System.out.println(q2.get(i) + " " + q4.get(i));
+
+
+            //sb.append("Answer").append('\n');
         }
 
-        System.out.print(sb);
+        //System.out.print(sb);
     }
 }

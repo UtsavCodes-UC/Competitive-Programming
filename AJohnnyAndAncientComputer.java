@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class AJohnnyAndAncientComputer {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,34 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            long a = fs.nextLong();
+            long b = fs.nextLong();
 
-            sb.append("Answer").append('\n');
+            if (a > b) {
+                a = b^a;
+                b = b^a;
+                a = a^b;
+            }
+            long ans = 0;
+            if (b%a == 0) {
+                b /= a;
+                while(b%8 == 0) {
+                    b /= 8;
+                    ans++;
+                }
+                while(b%4 == 0) {
+                    b /= 4;
+                    ans++;
+                }
+                while(b%2 == 0) {
+                    b /= 2;
+                    ans++;
+                }
+            }
+
+            if (b != 1) ans = -1;
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

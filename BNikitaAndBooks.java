@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BNikitaAndBooks {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,25 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            long arr[] = new long[n];
+            long residue = 0;
 
-            sb.append("Answer").append('\n');
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextLong();
+            }
+            String ans = "YES";
+            for(int i=0; i<n; i++) {
+                if (arr[i] < i+1) {
+                    residue -= i+1-arr[i];
+                    if(residue < 0) {
+                        ans = "NO";
+                        break;
+                    }
+                }
+                else residue += arr[i]-i-1;
+            }
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

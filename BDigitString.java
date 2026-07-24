@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BDigitString {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,22 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
+            String str = fs.next();
+            int n = str.length();
             
+            int c2 = 0;
+            int c13 = 0;
 
-            sb.append("Answer").append('\n');
+            for (int i=0; i<n; i++) {
+                int curr = str.charAt(i)-'0';
+
+                if (curr == 2) c2++;
+                else if(curr == 1 || curr==3) {
+                    c13 = Math.max(c13, c2)+1;
+                }
+            }
+            int ans = n-Math.max(c13, c2);
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

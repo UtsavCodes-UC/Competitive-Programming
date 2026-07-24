@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class CQuests {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,37 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int k = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            int a[] = new int[n];
+            int b[] = new int[n];
+            int prefix[] = new int[n];
+
+            for (int i=0; i<n; i++) {
+                a[i] = fs.nextInt();
+            }
+
+            prefix[0] = a[0];
+            for (int i=1; i<n; i++) {
+                prefix[i] = prefix[i-1] + a[i];
+            }
+
+            int currMax[] = new int[n];
+            for (int i=0; i<n; i++) {
+                b[i] = fs.nextInt();
+                if (i == 0) currMax[0] = b[0];
+                else currMax[i] = Math.max(currMax[i-1], b[i]);
+           }
+
+            int maxExp = 0;
+            for (int i=0; i<n; i++) {
+                int used = Math.min(k, i+1);
+                int exp = prefix[used-1] + (k-used)*currMax[used-1];
+                maxExp = Math.max(maxExp, exp);
+            }
+
+            sb.append(maxExp).append('\n');
         }
 
         System.out.print(sb);

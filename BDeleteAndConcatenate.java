@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BDeleteAndConcatenate {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,25 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            long c = fs.nextLong();
+            long arr[] = new long[n];
 
-            sb.append("Answer").append('\n');
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextLong();
+            }
+
+            Arrays.sort(arr);
+
+            long score = 0;
+
+            for(int i=0; i<n/2; i++) {
+                score += Math.max(arr[n-i-1] + arr[i] - 2*c, arr[n-i-1]-c);
+            }
+
+            if (n%2 == 1) score += arr[n/2] - c;
+
+            sb.append(score).append('\n');
         }
 
         System.out.print(sb);

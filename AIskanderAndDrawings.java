@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class AIskanderAndDrawings {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,19 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            String str = fs.next();
 
-            sb.append("Answer").append('\n');
+            int max = 0;
+            int start = -1;
+            for(int i=0; i<n; i++) {
+                if (str.charAt(i) == '*') {
+                    max = Math.max(max, i-start-1);
+                    start = i;
+                }
+            }
+            max = Math.max(max, n-1-start);
+            sb.append(Math.ceilDiv(max, 2)).append('\n');
         }
 
         System.out.print(sb);

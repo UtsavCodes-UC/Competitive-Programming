@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BDivanAndANewProject {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -114,19 +104,6 @@ public class CLASS_NAME {
         return a / gcd(a, b) * b;
     }
 
-    static boolean isPrime(long n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-
-        for (long i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0)
-                return false;
-        }
-
-        return true;
-    }
-
     public static void main(String[] args) throws Exception {
 
         FastScanner fs = new FastScanner();
@@ -136,11 +113,36 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
+            int n = fs.nextInt();
+            int arr[][] = new int[n][2];
+
+            for(int i=0; i<n; i++) {
+                arr[i][0] = fs.nextInt();
+                arr[i][1] = i;
+            }
             
+            Arrays.sort(arr, (a,b) -> Integer.compare(b[0], a[0]));
 
-            sb.append("Answer").append('\n');
+            int pos = 1;
+            long count = 0;
+            for (int i=0; i<n; i+=2) {
+                count += 2L * (long) pos * (long) arr[i][0];
+                arr[i][0] = pos;
+                if (i+1 < n) {
+                    count += 2L * (long) pos * (long) arr[i+1][0];
+                    arr[i+1][0] = -pos;
+                }
+                pos++;
+            }
+
+            Arrays.sort(arr, (a, b) -> Integer.compare(a[1], b[1]));
+            
+            System.out.println(count);
+            System.out.print(0 + " ");
+            for (int i=0; i<n; i++) {
+                System.out.print(arr[i][0] + " ");
+            }
+            System.out.println();
         }
-
-        System.out.print(sb);
     }
 }

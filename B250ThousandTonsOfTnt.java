@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class B250ThousandTonsOfTnt {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,34 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            long arr[] = new long[n];
 
-            sb.append("Answer").append('\n');
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextLong();
+            }
+
+            long[] pre = new long[n];
+            pre[0] = arr[0];
+            for (int i = 1; i < n; i++) {
+                pre[i] = arr[i] + pre[i - 1];
+            }
+
+            long ans = 0; 
+            for (int k = 1; k <= n; k++) {
+                if (n % k != 0) continue;
+                int start = k - 1;
+                long maxi = pre[start];
+                long mini = pre[start];
+                for (int idx = start + k; idx < n; idx += k) {
+                    long curr = pre[idx] - pre[idx - k];
+                    maxi = Math.max(maxi, curr);
+                    mini = Math.min(mini, curr);
+                }
+                ans = Math.max(ans, maxi - mini);
+            }
+ 
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

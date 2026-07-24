@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class CMoveBrackets {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,17 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            String str = fs.next();
+            int diff = 0;
+            int max = 0;
+            for(int i=0; i<n; i++) {
+                if(str.charAt(i) == '(') diff++;
+                else diff--;
+                if (diff<0) max=Math.max(max, -diff);
+            }
 
-            sb.append("Answer").append('\n');
+            sb.append(max).append('\n');
         }
 
         System.out.print(sb);

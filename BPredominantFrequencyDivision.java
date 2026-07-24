@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BPredominantFrequencyDivision {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,49 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int arr[] = new int[n];
 
-            sb.append("Answer").append('\n');
+            for (int i=0; i<n; i++) {
+                arr[i] = fs.nextInt();
+            }
+            int flags = 0;
+            int curr1 = 0;
+            int curr2 = 0;
+            int curr3 = 0;
+            int i = 0;
+            for (i=0; i<n; i++) {
+                if (arr[i] == 1) curr1++;
+                else if(arr[i] == 2) curr2++;
+                else if(arr[i] == 3) curr3++;
+                if (curr1 >= curr2 + curr3) {
+                    flags = 1;
+                    break;
+                }
+            }
+            i++;
+            // System.out.println("i" + i);
+            int count = curr1-curr2-curr3;
+            for (; i<n && count > 0; i++) {
+                if (arr[i] != 3) break;
+                count--;
+            }
+            curr1 = 0;
+            curr2 = 0;
+            curr3 = 0;
+            for (; i<n; i++) {
+                if (arr[i] == 1) curr1++;
+                else if(arr[i] == 2) curr2++;
+                else if(arr[i] == 3) curr3++;
+                if (curr1 + curr2 >= curr3) {
+                    flags = 2;
+                    break;
+                }
+            }
+            i++;
+            if (i < n) flags = 3;
+            String ans = (flags == 3) ? "YES" : "NO";
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class ABuyingTorches {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,13 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            long x= fs.nextLong();
+            long y = fs.nextLong();
+            long k = fs.nextLong();
 
-            sb.append("Answer").append('\n');
+            long ans = Math.ceilDiv(k*(y+1)-1, x-1) + k;
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

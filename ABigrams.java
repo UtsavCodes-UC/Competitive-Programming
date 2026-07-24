@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class ABigrams {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,19 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int k = fs.nextInt();
+            int arr[] = new int[k];
+            String ans = "NO";
+            int count = 0;
+            for(int i=0; i<k; i++) {
+                arr[i] = fs.nextInt();
+                if (arr[i] > 2) ans = "YES";
+                if (arr[i] >= 2) count++;
+            }
 
-            sb.append("Answer").append('\n');
+            if (count >= 2) ans = "YES";
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

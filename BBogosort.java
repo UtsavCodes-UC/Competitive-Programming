@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BBogosort {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,11 +126,21 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            Integer arr[] = new Integer[n];
 
-            sb.append("Answer").append('\n');
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextInt();
+            }
+
+            Arrays.sort(arr, Collections.reverseOrder());
+
+            for(int i=0; i<n; i++) {
+                System.out.print(arr[i] + " ");
+            }
+            System.out.println();
+
         }
 
-        System.out.print(sb);
     }
 }

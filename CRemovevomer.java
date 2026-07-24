@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class CRemovevomer {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,18 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            String str = fs.next();
+            int changes = 0;
+            for (int i=1; i<n; i++) {
+                if (str.charAt(i) != str.charAt(i-1)) {
+                    changes++;
+                }
+            }
+            int ans = 1;
+            if (changes == 1) ans = 2; 
 
-            sb.append("Answer").append('\n');
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

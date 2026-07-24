@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class EBuildingAnAquarium {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -135,12 +135,34 @@ public class CLASS_NAME {
         int t = fs.nextInt();
 
         while (t-- > 0) {
-
-            
-
-            sb.append("Answer").append('\n');
-        }
-
-        System.out.print(sb);
+			long n = fs.nextLong(); // Number of columns
+			long x = fs.nextLong(); // Maximum water units available
+			List<Long> heights = new ArrayList<>(); // List to store the heights of the coral columns
+			for (int i = 0; i < n; i++) { // Input the heights of the columns
+				heights.add(fs.nextLong());
+			}
+			long si = 1, ei = (long) 1e12, ans = -1; // Initialize binary search bounds and answer
+			while (si <= ei) { // Perform binary search
+				long mid = si + (ei - si) / 2; // Calculate mid-point
+				if (check(mid, heights, x)) { // Check if 'mid' height is feasible
+					ans = mid; // Update answer
+					si = mid + 1; // Try for a higher height
+				} else {
+					ei = mid - 1; // Try for a lower height
+				}
+			}
+			System.out.println(ans); // Output the maximum possible height
+		}
     }
+
+    private static boolean check(long mid, List<Long> heights, long x) {
+		long units = 0; // Initialize water units needed
+		int n = heights.size(); // Get the number of columns
+		for (int i = 0; i < n; i++) { // Iterate over each column
+			if (heights.get(i) < mid) { // If the column is shorter than 'mid'
+				units += (mid - heights.get(i)); // Calculate the water needed to fill it to 'mid'
+			}
+		}
+		return units <= x; // Return true if the required water is within the limit
+	}
 }

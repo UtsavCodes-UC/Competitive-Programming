@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BYetAnotherConstructive {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,27 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int k = fs.nextInt();
+            long m = fs.nextLong();
 
-            sb.append("Answer").append('\n');
+            String ans = "YES";
+            if (k > m) ans = "NO";
+
+            StringBuilder sb2 = new StringBuilder();
+
+            for(int i=0; i<k-1; i++) {
+                sb2.append("1 ");
+            }
+
+            sb2.append(m-k+1 + " ");
+
+            for(int i=0; i<n-k; i++) {
+                sb2.append(m+1 + " ");
+            }
+            sb.append(ans).append("\n");
+            if (ans == "YES")
+                sb.append(sb2).append('\n');
         }
 
         System.out.print(sb);

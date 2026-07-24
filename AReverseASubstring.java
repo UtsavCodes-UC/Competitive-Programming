@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class AReverseASubstring {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -132,15 +122,22 @@ public class CLASS_NAME {
         FastScanner fs = new FastScanner();
         StringBuilder sb = new StringBuilder();
 
-        int t = fs.nextInt();
+        int t = 1;
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            String str = fs.next();
+            int i = 1;
+            for (i=1; i<n; i++) {
+                if (str.charAt(i) - '0' < str.charAt(i-1) - '0') {
+                    System.out.println("YES");
+                    System.out.println(i + " " + (i+1));
+                    break;
+                }
+            }
 
-            sb.append("Answer").append('\n');
+            if (i == n) System.out.println("NO");
         }
-
-        System.out.print(sb);
     }
 }

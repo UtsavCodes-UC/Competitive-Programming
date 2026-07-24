@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BYarikAndMusicalNotes {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,26 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n  = fs.nextInt();
+            long arr[] = new long[n];
 
-            sb.append("Answer").append('\n');
+            HashMap<Long, Integer> freq = new HashMap<>();
+
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextLong();
+                freq.put(arr[i], freq.getOrDefault(arr[i], 0) + 1);
+            }
+
+            long ans = 0;
+
+            for(int val : freq.values()) {
+                ans += 1L * val * (val-1)/2;
+            }
+
+            ans += 1L * freq.getOrDefault(1L, 0) * freq.getOrDefault(2L, 0);
+
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

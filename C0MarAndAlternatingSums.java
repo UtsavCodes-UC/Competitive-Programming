@@ -1,7 +1,10 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class C0MarAndAlternatingSums {
+    static final long MOD = 1000000007;
+    static final int MAX = 200005;
+    static long[] pow = new long[MAX];
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -127,18 +130,55 @@ public class CLASS_NAME {
         return true;
     }
 
+    static void pre(){
+        pow[0] = 1;
+        for(int i = 1; i < MAX; i++){
+            pow[i] = ((pow[i-1])%MOD*2)%MOD;
+        }
+    }
     public static void main(String[] args) throws Exception {
 
         FastScanner fs = new FastScanner();
         StringBuilder sb = new StringBuilder();
 
+        pre();
+
         int t = fs.nextInt();
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            long arr[] = new long[n];
 
-            sb.append("Answer").append('\n');
+            for(int i=0; i<n; i++) arr[i] = fs.nextLong();
+
+            HashMap<Long, Long> map = new HashMap<>();
+            long cnt = 0;
+            for(int i = 0; i < n; i++){
+                map.put(arr[i], map.getOrDefault(arr[i], 0L) + 1);
+                if(arr[i] == -1){
+                    cnt++;
+                }
+            }
+            int d = map.size();
+            long ans = pow[n-d];
+ 
+            if (cnt != 0) {
+                long p = 0;
+ 
+                map.remove(-1L);
+ 
+                for (long i : map.keySet()) {
+ 
+                    if (map.containsKey(i + 1)) {
+                        p = (p + ans) % MOD;
+                    }
+                }
+ 
+                ans = (ans + p) % MOD;
+            }
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

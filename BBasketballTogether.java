@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BBasketballTogether {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -114,32 +104,35 @@ public class CLASS_NAME {
         return a / gcd(a, b) * b;
     }
 
-    static boolean isPrime(long n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-
-        for (long i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0)
-                return false;
-        }
-
-        return true;
-    }
-
     public static void main(String[] args) throws Exception {
 
         FastScanner fs = new FastScanner();
         StringBuilder sb = new StringBuilder();
 
-        int t = fs.nextInt();
+        int n = fs.nextInt();
+        long d = fs.nextLong();
 
-        while (t-- > 0) {
+        long arr[] = new long[n];
 
-            
-
-            sb.append("Answer").append('\n');
+        for (int i=0; i<n; i++) {
+            arr[i] = fs.nextLong();
         }
+
+        Arrays.sort(arr);
+
+        int l = -1;
+        int r = n-1;
+        int count = 0;
+        while(l < r) {
+            long inc = d/arr[r];
+            l += inc;
+            if (l < r) {
+                count++;
+                r--;
+            }
+        }
+
+        sb.append(count).append('\n');
 
         System.out.print(sb);
     }

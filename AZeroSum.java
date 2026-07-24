@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class AZeroSum {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,20 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int arr[] = new int[n];
 
-            sb.append("Answer").append('\n');
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextInt();
+            }
+            int count = 0;
+            for(int i=0; i<n-1; i+=2) {
+                if (arr[i] == arr[i+1]) count++;
+            }
+
+            if (n%2 == 1) count = 1;
+            String ans = (count%2 == 0) ? "YES" : "NO";
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

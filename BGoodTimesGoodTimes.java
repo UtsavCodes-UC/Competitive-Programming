@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BGoodTimesGoodTimes {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,12 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            String x = fs.next();
+            long ans = 0;
 
-            sb.append("Answer").append('\n');
+            ans = (long) Math.pow(10, x.length()) + 1;
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

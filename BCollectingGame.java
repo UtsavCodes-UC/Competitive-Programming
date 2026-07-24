@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BCollectingGame {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,43 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+             int n = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            Pair[] a = new Pair[n];
+
+            for (int i = 0; i < n; i++) {
+                a[i] = new Pair(fs.nextLong(), i);
+            }
+
+            Arrays.sort(a, Comparator.comparingLong(x -> x.val));
+
+            long[] pref = new long[n];
+            pref[0] = a[0].val;
+
+            for (int i = 1; i < n; i++)
+                pref[i] = pref[i - 1] + a[i].val;
+
+            int[] reach = new int[n];
+            reach[n - 1] = n - 1;
+
+            for (int i = n - 2; i >= 0; i--) {
+
+                if (pref[i] >= a[i + 1].val)
+                    reach[i] = reach[i + 1];
+                else
+                    reach[i] = i;
+            }
+
+            int[] ans = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                ans[a[i].idx] = reach[i];
+            }
+
+            for (int i = 0; i < n; i++) {
+                sb.append(ans[i]).append(' ');
+            }
+            sb.append('\n');
         }
 
         System.out.print(sb);

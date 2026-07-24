@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class CInversionOfASubsequence {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,36 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int a[] = new int[n];
+            int b[] = new int[n];
 
-            sb.append("Answer").append('\n');
+            boolean isOne = false;
+            for(int i=0; i<n; i++) {
+                a[i] = fs.nextInt();
+                if (a[i] == 1) isOne = true;
+            }
+
+            boolean isZero = false;
+            for(int i=0; i<n; i++) {
+                b[i] = fs.nextInt();
+                if (b[i] == 0) isZero = true;
+            }
+
+            boolean equal = true;
+            int changes= 0;
+            for (int i=0; i<n; i++) {
+                if (a[i] != b[i]) equal = false;
+                if (a[i] == 1 && b[i] == 0) changes++;
+            }
+
+            int ans;
+            if (equal) ans = 0;
+            else if (!isOne || !isZero) ans = -1;
+            else if(changes%2 == 0) ans = 2;
+            else ans = 1;
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class CBanajSUltimatum {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,30 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            long arr[] = new long[n];
 
-            sb.append("Answer").append('\n');
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextLong();
+            }
+
+            HashMap<Long, Integer> freq = new HashMap<>();
+
+            for(int i=0; i<n; i++) {
+                freq.put(arr[i], freq.getOrDefault(arr[i], 0)+1);
+            }
+
+            long ans = 0;
+            long rem = 0;
+            for(long i : freq.keySet()) {
+                if (i!=0) {
+                    ans += freq.get(i)/2;
+                    rem += freq.get(i)%2;
+                }
+            }
+            if (rem%2 == 0) ans += rem;
+            else ans+=rem+1;
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class ECardboardForPictures {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,36 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            long c = fs.nextLong();
 
-            sb.append("Answer").append('\n');
+            int arr[] = new int[n];
+
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextInt();
+            }
+
+            long w = -1;
+            long l = 1, r=1000000000;
+
+            while(l <= r) {
+                long mid = l + (r-l)/2;
+                long sum = 0;
+
+                for(int i=0; i<n; i++) {
+                    sum += (arr[i] + 2*mid) * (arr[i] + 2*mid);
+                    if (sum > c) break;
+                }
+
+                if (sum <= c) {
+                    l = mid+1;
+                    w = mid;
+                }
+                else r = mid-1;
+
+            }
+
+            sb.append(w).append('\n');
         }
 
         System.out.print(sb);

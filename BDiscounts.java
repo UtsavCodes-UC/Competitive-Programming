@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BDiscounts {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,32 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int k = fs.nextInt();
+            long [] a = new long[n];
+            long total = 0;
+            for (int i = 0; i < n; i++) {
+                a[i] = fs.nextInt();
+                total += a[i];
+            }
+            int [] b = new int[k];
+            for (int i = 0; i < k; i++) b[i] = fs.nextInt();
+ 
+            Arrays.sort(a);
+            Arrays.sort(b);
+ 
+            int ptr = 0;
+            int i = n - 1;
+            while (i >= 0 && ptr < k) {
+                int x = b[ptr];
+                if (i - x + 1 >= 0) {
+                    total -= a[i - x + 1];
+                    i -= x;
+                }
+                ptr++;
+            }
 
-            sb.append("Answer").append('\n');
+            sb.append(total).append('\n');
         }
 
         System.out.print(sb);

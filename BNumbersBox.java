@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BNumbersBox {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,28 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int m = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            int arr[][] = new int[n][m];
+            int sum = 0;
+            int min = 100;
+            int negs = 0;
+
+            for (int i=0; i<n; i++) {
+                for (int j=0; j<m; j++) {
+                    arr[i][j] = fs.nextInt();
+                    sum += Math.abs(arr[i][j]);
+                    min = Math.min(Math.abs(arr[i][j]), min);
+                    if (arr[i][j]< 0) negs++;
+                }
+            }
+
+            int ans = sum - 2*min;
+
+            if (negs % 2 == 0) ans = sum;
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class CMexor {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -127,6 +127,12 @@ public class CLASS_NAME {
         return true;
     }
 
+    static int nearestPower2(int n) {
+        int ans = 2;
+        while(ans < n) ans*=2;
+        return ans/2;
+    }
+
     public static void main(String[] args) throws Exception {
 
         FastScanner fs = new FastScanner();
@@ -136,9 +142,34 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int k = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            String ans = "YES";
+            StringBuilder sb2 = new StringBuilder();
+            int xor = n^k;
+            if (xor < n) {
+                for(int i=n-1; i>=0; i--) {
+                    if (i != xor) sb2.append(i + " ");
+                }
+                sb2.append(xor);
+            }
+            else {
+                int n1 = Integer.highestOneBit(xor);
+                int n2 = xor^n1;
+
+                if (n1 > n-1) ans = "NO";
+                else {
+                    for(int i=n-1; i>=0; i--) {
+                        if(i != n1 && i != n2) sb2.append(i + " ");
+                    }
+                    sb2.append(n2 + " ");
+                    sb2.append(n1 + " ");
+                }
+            }
+
+            sb.append(ans).append('\n');
+            if (ans == "YES") sb.append(sb2).append("\n");
         }
 
         System.out.print(sb);

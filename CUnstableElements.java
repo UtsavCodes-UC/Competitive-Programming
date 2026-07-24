@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class CUnstableElements {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,54 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int k = fs.nextInt();
+            int arr[] = new int[n];
+            int distincts = 1;
+            arr[0] = fs.nextInt();
+            for (int i=1; i<n; i++) {
+                arr[i] = fs.nextInt();
+                if (arr[i] != arr[i-1]) distincts++;
+            }
+            int freq[] = new int[distincts];
+            int j =0;
+            freq[0] = 1;
+            for(int i=1; i<n; i++) {
+                if (arr[i] == arr[i-1]) freq[j]++;
+                else {
+                    j++;
+                    freq[j] = 1;
+                }
+            }
+            Arrays.sort(freq);
+            long suffix[] = new long[distincts+1];
 
-            sb.append("Answer").append('\n');
+            for(int i=distincts-1; i>=0; i--) {
+                suffix[i] = suffix[i+1] + freq[i];
+            }
+            int ans = 0;
+            int idx = 0;
+            long prev = 0;
+
+            while(idx < distincts) {
+                int curr = freq[idx];
+                int left = distincts-idx;
+                long sum = suffix[idx];
+
+                long low = prev;
+                long high = curr-1;
+
+                if ((k-sum) % left == 0) {
+                    long need = Math.ceilDiv(sum-k, left);
+                    if (Math.max(low, need) <= high) ans++;
+                }
+
+                while(idx < distincts && freq[idx] == curr) {
+                    idx++;
+                }
+                prev = curr;
+            }
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

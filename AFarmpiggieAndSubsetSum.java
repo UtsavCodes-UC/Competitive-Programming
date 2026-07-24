@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class AFarmpiggieAndSubsetSum {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,11 +136,14 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            for (int i=2; i<=n; i++) {
+                System.out.print(i + " ");
+            }
+            System.out.println(1);
+
         }
 
-        System.out.print(sb);
     }
 }

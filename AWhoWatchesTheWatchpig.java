@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class AWhoWatchesTheWatchpig {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,20 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int k = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            String str = fs.next();
+            int ans = 0;
+            for (int i=0; i<k; i++) {
+                if (str.charAt(i) == 'L') ans++;
+            }
+
+            for(int i=0; i<k; i++) {
+                if (str.charAt(n-i-1) == 'R') ans++;
+            }
+            if(k > n/2) ans = -1;
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

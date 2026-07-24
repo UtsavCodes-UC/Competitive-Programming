@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BDifferentDivisors {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,27 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int d = fs.nextInt();
+            int a = 0;
+            int b = 0;
 
-            sb.append("Answer").append('\n');
+            for (int i=d+1; i<d+1+1000; i++) {
+                if (isPrime(i)) {
+                    a = i;
+                    break;
+                }
+            }
+
+            for (int i=a+d; i<a+d+1000; i++) {
+                if (isPrime(i)) {
+                    b = i;
+                    break;
+                }
+            }
+
+            long ans = (long) a * (long) b;
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

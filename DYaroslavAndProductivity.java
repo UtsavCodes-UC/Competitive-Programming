@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class DYaroslavAndProductivity {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -127,6 +127,7 @@ public class CLASS_NAME {
         return true;
     }
 
+    static final long NEG = -(1L << 60);
     public static void main(String[] args) throws Exception {
 
         FastScanner fs = new FastScanner();
@@ -134,11 +135,51 @@ public class CLASS_NAME {
 
         int t = fs.nextInt();
 
+
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int m = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            long a[] = new long[n+1];
+
+            for(int i=1; i<=n; i++) {
+                a[i] = fs.nextLong();
+            }
+
+            int b[] = new int[m];
+            boolean available[] = new boolean[n+1];
+            Arrays.fill(available, false);
+            for(int i=0; i<m; i++) {
+                b[i] = fs.nextInt();
+                available[b[i]] = true;
+            }
+
+            long cases[] = new long[] {0, NEG};
+
+            for(int i=n; i>0; i--) {
+                long negCase[] = new long[] {NEG, NEG};
+
+                for(int j=0; j<2; j++) {
+                    if (cases[j] == NEG) continue;
+                    if (!available[i]) {
+                        int curr = j;
+                        long val = cases[j] + (curr == 0 ? a[i] : -a[i]);
+                        negCase[curr] = Math.max(negCase[curr], val);
+                    }
+                    else {
+                        for(int take=0; take<2; take++) {
+                            int curr = j^take;
+                            long val = cases[j] + (curr == 0 ? a[i] : -a[i]);
+                            negCase[curr] = Math.max(negCase[curr], val);
+                        }
+                    }
+                }
+
+                cases = negCase;
+            }
+            long ans = Math.max(cases[0], cases[1]);
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

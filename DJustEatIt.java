@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class DJustEatIt {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,34 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            long arr[] = new long[n];
+            long sum =0;
+
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextLong();
+                sum += arr[i];
+            }
+            long currSum = 0;
+            String ans = "YES";
+            for(int i=0; i<n-1; i++) {
+                currSum = Math.max(arr[i], currSum+arr[i]);
+                if(currSum >= sum) {
+                    ans = "NO";
+                    break;
+                }
+            }
+            currSum = 0;
+            for(int i=1; i<n; i++) {
+                currSum = Math.max(arr[i], currSum+arr[i]);
+                if(currSum >= sum) {
+                    ans = "NO";
+                    break;
+                }
+            }
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BLukeIsAFoodie {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -114,19 +104,6 @@ public class CLASS_NAME {
         return a / gcd(a, b) * b;
     }
 
-    static boolean isPrime(long n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-
-        for (long i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0)
-                return false;
-        }
-
-        return true;
-    }
-
     public static void main(String[] args) throws Exception {
 
         FastScanner fs = new FastScanner();
@@ -136,9 +113,35 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            long x = fs.nextLong();
 
-            sb.append("Answer").append('\n');
+            long arr[] = new long[n];
+
+            long segment[][] = new long[n][2];
+
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextLong();
+                segment[i][0] = arr[i]-x;
+                segment[i][1] = arr[i]+x;
+            }
+
+            long l = segment[0][0];
+            long r = segment[0][1];
+            long ans = 0;
+
+            for (int i=1; i<n; i++) {
+                l = Math.max(l, segment[i][0]);
+                r = Math.min(r, Math.min(r, segment[i][1]));
+
+                if (l > r) {
+                    l = segment[i][0];
+                    r = segment[i][1];
+                    ans++;
+                }
+            }
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

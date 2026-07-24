@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BDejaVu {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,11 +136,40 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+			int q = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+			long a[] = new long[n];
+			for (int i = 0; i < n; i++) {
+				a[i] = fs.nextLong();
+			}
+
+			int x[] = new int[q];
+			for (int i = 0; i < q; i++) {
+				x[i] = fs.nextInt();
+			}
+
+			int prev = 31;
+
+			for (int i = 0; i < q; i++) {
+				if (x[i] >= prev) continue;
+
+				long val = (long) Math.pow(2, x[i]);
+
+				for (int j = 0; j < n; j++) {
+					if (a[j] % val == 0) {
+						a[j] += (val / 2);
+					}
+				}
+
+				prev = x[i];
+			}
+
+			for (int i = 0; i < n; i++) {
+				System.out.print(a[i] + " ");
+			}
+			System.out.println();            
+
         }
-
-        System.out.print(sb);
     }
 }

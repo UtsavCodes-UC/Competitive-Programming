@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BEzraftAndArray {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,11 +136,22 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
-
-            sb.append("Answer").append('\n');
+            int n = fs.nextInt();
+            long ans = 0;
+            if (n == 2) System.out.println(-1);
+            else {
+                for(int i=1; i<=n; i++) {
+                    if (i<=3) {
+                        System.out.print(2*i + " ");
+                        ans = 2*i;
+                    }
+                    else {
+                        ans *= 2;
+                        System.out.print(ans + " ");
+                    }
+                }
+                System.out.println();
+            }
         }
-
-        System.out.print(sb);
     }
 }

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class AOptimalPurchase {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,22 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            long n = fs.nextLong();
+            long a = fs.nextInt();
+            long b = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            long cost = 0;
+
+            if (b < 3*a) {
+                cost += (n/3) * b;
+                int rem = (int) n%3;
+                cost += Math.min(rem*a, b); 
+            }
+            else {
+                cost += a*n;
+            }
+
+            sb.append(cost).append('\n');
         }
 
         System.out.print(sb);

@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class FLiHuaAndPattern {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,37 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            long k = fs.nextLong();
 
-            sb.append("Answer").append('\n');
+            int mat[][] = new int[n][n];
+
+            for(int i=0; i<n; i++) {
+                for(int j=0; j<n; j++) {
+                    mat[i][j] = fs.nextInt();
+                }
+            }
+
+            int matRot[][] = new int[n][n];
+
+            for(int i=0; i<n; i++) {
+                for(int j=0; j<n; j++) {
+                    matRot[i][j] = mat[n-i-1][n-j-1];
+                }
+            }
+
+            int diff = 0;
+
+            for(int i=0; i<n; i++) {
+                for(int j=0; j<n; j++) {
+                    diff += Math.abs(mat[i][j] - matRot[i][j]);
+                }
+            }
+
+            System.out.println(diff);
+            String ans = diff==k ? "YES" : "NO";
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

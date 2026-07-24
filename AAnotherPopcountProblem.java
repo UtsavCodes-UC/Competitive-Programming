@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class AAnotherPopcountProblem {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,21 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int k = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            long ans = 0;
+            long left = n;
+
+            for (int bit=0; bit<31; bit++) {
+                long curr = 1L << bit;
+                if(curr > left) break;
+                long min = Math.min(k, left/curr);
+                ans += min;
+                left -= min * curr;
+            }
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

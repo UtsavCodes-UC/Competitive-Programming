@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BAnnoyingTheGhost {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -113,20 +103,6 @@ public class CLASS_NAME {
     static long lcm(long a, long b) {
         return a / gcd(a, b) * b;
     }
-
-    static boolean isPrime(long n) {
-        if (n <= 1) return false;
-        if (n <= 3) return true;
-        if (n % 2 == 0 || n % 3 == 0) return false;
-
-        for (long i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0)
-                return false;
-        }
-
-        return true;
-    }
-
     public static void main(String[] args) throws Exception {
 
         FastScanner fs = new FastScanner();
@@ -136,9 +112,42 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            long a[] = new long[n];
+            long b[] = new long[n];
 
-            sb.append("Answer").append('\n');
+            for (int i=0; i<n; i++) {
+                a[i] =fs.nextLong();
+            }
+
+            for (int i=0; i<n; i++) {
+                b[i] =fs.nextLong();
+            }
+            long swaps = 0;
+
+            for (int i=0; i<n; i++) {
+                int idx = -1;
+                for (int j=i; j<n; j++) {
+                    if (a[j] <= b[i]) {
+                        idx = j;
+                        break;
+                    }
+                }
+
+                if (idx == -1) {
+                    swaps = -1;
+                    break;
+                }
+
+                for (int j=idx; j>i; j--) {
+                    long temp = a[j];
+                    a[j] = a[j-1];
+                    a[j-1] = temp;
+                    swaps++;
+                }
+            }
+            
+            sb.append(swaps).append('\n');
         }
 
         System.out.print(sb);

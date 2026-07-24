@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BCrimsonTriples {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,14 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            long ans = 0;
+            for (int b=1; b<=n; b++) {
+                long num = Math.floorDiv(n, b);
+                ans += num * num;
+            }
 
-            sb.append("Answer").append('\n');
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

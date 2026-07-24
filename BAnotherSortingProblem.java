@@ -11,18 +11,25 @@ public class BAnotherSortingProblem {
             int arr[] = new int[n];
 
             for (int i=0; i<n; i++) arr[i] = sc.nextInt();
-            int maxi = arr[n-1];
-            int count = 0;
+            int maxDiff = 0;
 
-            for (int i=n-2; i>=0; i--) {
-                if (arr[i] >= maxi) {
-                    count++;
-                    maxi = arr[i];
+            for (int i=0; i<n-1; i++) {
+                if (arr[i] > arr[i+1]) {
+                    maxDiff = Math.max(maxDiff, arr[i] - arr[i+1]);
                 }
             }
 
-            if (count > 1) System.out.println("NO");
-            else System.out.println("YES");
+            for (int i=0; i<n-1; i++) {
+                if (arr[i] > arr[i+1]) arr[i+1] += maxDiff;
+            }
+            String isSorted = "YES";
+            for (int i=0; i<n-1; i++) {
+                if (arr[i] > arr[i+1]) {
+                    isSorted = "NO";
+                    break;
+                }
+            }
+            System.out.println(isSorted);
         }
     }
 }

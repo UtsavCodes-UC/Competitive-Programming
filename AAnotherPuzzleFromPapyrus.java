@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class AAnotherPuzzleFromPapyrus {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,45 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int c = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            int a[] = new int[n];
+            int b[] = new int[n];
+
+            for (int i=0; i<n; i++) {
+                a[i] = fs.nextInt();
+            }
+
+            for(int i=0; i<n; i++) {
+                b[i] = fs.nextInt();
+            }
+            int ans1 = 0;
+            for (int i=0; i<n; i++) {
+                int diff = a[i] - b[i];
+                ans1 += diff;
+                if (diff < 0) {
+                    ans1 = -1;
+                    break;
+                }
+            }
+            int ans2 = c;
+            Arrays.sort(a);
+            Arrays.sort(b);
+            for (int i=0; i<n; i++) {
+                int diff = a[i] - b[i];
+                ans2 += diff;
+                if (diff < 0) {
+                    ans2 = -1;
+                    break;
+                }
+            }
+            int ans = 0;
+            if (ans1 == -1 && ans2 == -1) ans = -1;
+            else if (ans1 == -1) ans = ans2;
+            else if (ans2 == -1) ans = ans1;
+            else ans = Math.min(ans1, ans2);
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

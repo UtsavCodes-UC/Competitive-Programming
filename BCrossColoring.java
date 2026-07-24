@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class BCrossColoring {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,43 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int m = fs.nextInt();
+            long k = fs.nextInt();
+            int q = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            int x[] = new int[q];
+            int y[] = new int[q];
+
+            for (int i=0; i<q; i++) {
+                x[i] = fs.nextInt();
+                y[i] = fs.nextInt();
+            }
+
+            boolean row[] = new boolean[n+1];
+            boolean col[] = new boolean[m+1];
+
+            int rows = 0;
+            int cols = 0;
+            long ans = 1;
+
+            for (int i=q-1; i>=0; i--) {
+                boolean take = false;
+
+                if ((!row[x[i]] && cols<m) || (!col[y[i]] && rows<n )) take = true;
+                if (take) ans = (ans*k) % 998244353L;
+                if (!row[x[i]]) {
+                    row[x[i]] = true;
+                    rows++;
+                }
+
+                if(!col[y[i]]) {
+                    col[y[i]] = true;
+                    cols++;
+                }
+            }
+
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);

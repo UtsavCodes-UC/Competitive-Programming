@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class ADivideAndConquer {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -89,16 +89,6 @@ public class CLASS_NAME {
         }
     }
 
-    static class Pair {
-        long val;
-        int idx;
-
-        Pair(long val, int idx) {
-            this.val = val;
-            this.idx = idx;
-        }
-    }
-
     // Utility Functions
 
     static long gcd(long a, long b) {
@@ -136,9 +126,11 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int x = fs.nextInt();
+            int y = fs.nextInt();
 
-            sb.append("Answer").append('\n');
+            if (x % y == 0) System.out.println("YES");
+            else System.out.println("NO");
         }
 
         System.out.print(sb);

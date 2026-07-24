@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class EMashaAndTheGarland {
 
     static class FastScanner {
         private final BufferedInputStream in =

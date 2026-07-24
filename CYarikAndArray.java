@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class CLASS_NAME {
+public class CYarikAndArray {
 
     static class FastScanner {
         private final BufferedInputStream in =
@@ -136,9 +136,36 @@ public class CLASS_NAME {
 
         while (t-- > 0) {
 
-            
+            int n = fs.nextInt();
+            int arr[] = new int[n];
+            for(int i=0; i<n; i++) {
+                arr[i] = fs.nextInt();
+            }
 
-            sb.append("Answer").append('\n');
+            int i=0, j=0;
+            long ans = Long.MIN_VALUE;
+            long currSum = 0;
+
+            while(j<n) {
+                if (currSum < 0) {
+                    currSum = 0;
+                    i=j;
+                }
+                
+                if(i<j) {
+                    if(((Math.abs(arr[j])%2)^(Math.abs(arr[j-1])%2))==1) currSum+=arr[j];
+                    else {
+                        currSum = arr[j];
+                        i=j;
+                    }
+                }
+                else currSum = arr[j];
+
+                ans = Math.max(ans, currSum);
+                j++;
+            }
+            
+            sb.append(ans).append('\n');
         }
 
         System.out.print(sb);
